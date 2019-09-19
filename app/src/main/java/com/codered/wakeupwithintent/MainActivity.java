@@ -41,17 +41,6 @@ public class MainActivity extends Activity
 	}
 
 	private boolean isRunning(String app) {
-		String s = "";
-		ActivityManager am = (ActivityManager)getApplicationContext().getSystemService(ACTIVITY_SERVICE);
-		UsageStatsManager usm = (UsageStatsManager)getSystemService(USAGE_STATS_SERVICE);
-		long time = System.currentTimeMillis();
-		List<UsageStats> stats = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time - 1000*10, time);
-		if (stats != null){
-			for (int i = 0; i < stats.size(); i++) {
-				s += stats.get(i).getPackageName();
-			}
-		}
-		test(s);
 		return false;
 	}
 
@@ -73,21 +62,30 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		MediaSession sess = new MediaSession(
-			getContext(),
-			"TAG"
-		);
-		sess.setCallback(new Callback() {
-			@Override
-			public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
-				test("got event");
-				return super.onMediaButtonEvent(mediaButtonIntent);
-			}
-		});
-		sess.setFlags(
-			MediaSession.FLAG_HANDLES_MEDIA_BUTTONS
-		);
-		sess.setActive(true);
-	
+		Intent intent = getIntent();
+		Uri uri = intent.getData();
+		if (intent.getType().equals("text/plain")) {
+			test("RECEIVED!");
+		}
+
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
