@@ -4,6 +4,7 @@ import java.util.*;
 import android.app.*;
 import android.os.*;
 import android.view.*;
+import android.content.BroadcastReceiver;
 
 public class BluetoothActivity extends BroadcastReceiver
 {
