@@ -67,6 +67,9 @@ public class MainActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		if (MainActivity.intentCount != 0) {
+			return;
+		}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
