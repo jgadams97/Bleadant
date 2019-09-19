@@ -15,7 +15,7 @@ import android.app.usage.*;
 import android.media.session.MediaSession;
 import android.net.Uri;
 
-public class MainActivity extends Activity
+public class IntentActivity extends Activity
 {
 
 	@Override
