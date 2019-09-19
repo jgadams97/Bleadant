@@ -54,18 +54,23 @@ public class MainActivity extends Activity
 		return false;
 	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-		/*new android.os.Handler().postDelayed(
+	private void keepUpdating() {
+		test(BluetoothActivity.received + "");
+		new android.os.Handler().postDelayed(
 			new Runnable() {
 				public void run() {
-					test();
+					keepUpdating();
 				}
 			},
-			10000
-		);*/
-    }
+			100
+		);
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		keepUpdating();
+	}
 }
