@@ -30,13 +30,13 @@ public class MainActivity extends Activity
 		tv.setText(s);
 		//wakeUp();
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		test(keyCode + "");
 		return true;
 	}
-	
+
 	private boolean isRunning(String app) {
 		String s = "";
 		ActivityManager am = (ActivityManager)getApplicationContext().getSystemService(ACTIVITY_SERVICE);
@@ -51,13 +51,12 @@ public class MainActivity extends Activity
 		test(s);
 		return false;
 	}
-	
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-		
 		/*new android.os.Handler().postDelayed(
 			new Runnable() {
 				public void run() {
