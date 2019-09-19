@@ -12,6 +12,7 @@ import android.os.PowerManager.WakeLock;
 import junit.framework.*;
 import android.content.Intent;
 import android.app.usage.*;
+import android.media.session.MediaSession;
 
 public class MainActivity extends Activity
 {
@@ -55,7 +56,7 @@ public class MainActivity extends Activity
 	}
 
 	private void keepUpdating() {
-		test(BluetoothActivity.received + "");
+		/*test(BluetoothActivity.received + "");
 		new android.os.Handler().postDelayed(
 			new Runnable() {
 				public void run() {
@@ -63,7 +64,7 @@ public class MainActivity extends Activity
 				}
 			},
 			100
-		);
+		);*/
 	}
 
 	@Override
@@ -71,6 +72,22 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		keepUpdating();
+
+		MediaSession sess = new MediaSession(
+			getContext(),
+			"TAG"
+		);
+		sess.setCallback(new Callback() {
+			@Override
+			public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
+				test("got event");
+				return super.onMediaButtonEvent(mediaButtonIntent);
+			}
+		});
+		sess.setFlags(
+			MediaSession.FLAG_HANDLES_MEDIA_BUTTONS
+		);
+		sess.setActive(true);
+	
 	}
 }
