@@ -17,6 +17,7 @@ import android.net.Uri;
 
 public class MainActivity extends Activity
 {
+	public static int intentCount = 0;
 	private void wakeUp() {
 		PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
 		WakeLock wl = pm.newWakeLock(
@@ -46,7 +47,7 @@ public class MainActivity extends Activity
 	}
 
 	private void keepUpdating() {
-		/*test(BluetoothActivity.received + "");
+		test(MainActivity.intentCount + "");
 		new android.os.Handler().postDelayed(
 			new Runnable() {
 				public void run() {
@@ -54,7 +55,7 @@ public class MainActivity extends Activity
 				}
 			},
 			100
-		);*/
+		);
 	}
 
 	@Override
@@ -63,7 +64,13 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		Intent intent = getIntent();
+
+		if (MainActivity.intentCount == 0) {
+			keepUpdating();
+		}
+		MainActivity.intentCount += 1;
+
+		/*Intent intent = getIntent();
 		Uri uri = intent.getData();
 		String type = intent.getType();
 		if (type == null) {
@@ -74,6 +81,8 @@ public class MainActivity extends Activity
 		/*if (intent.getType().equals("text/plain")) {
 			test("RECEIVED!");
 		}*/
+
+		
 
 	}
 }
