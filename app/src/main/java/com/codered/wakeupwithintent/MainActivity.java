@@ -58,42 +58,17 @@ public class MainActivity extends Activity
 		);
 	}
 
-	private void sendIntent() {
-		Intent intent = new Intent();
-		intent.setAction("com.codered.wakeupwithintent.BUTTON");
-		startActivity(intent);			
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		if (MainActivity.intentCount != 0) {
-			return;
-		}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
 
 		if (MainActivity.intentCount == 0) {
 			keepUpdating();
-			sendIntent();
 		}
 		MainActivity.intentCount += 1;
-
-		/*Intent intent = getIntent();
-		Uri uri = intent.getData();
-		String type = intent.getType();
-		if (type == null) {
-			test("null");
-		} else {
-			test(type);
-		}
-		/*if (intent.getType().equals("text/plain")) {
-			test("RECEIVED!");
-		}*/
-
-		
-
 	}
 }
 

@@ -12,7 +12,7 @@
 			android:name=".MainActivity"
 			android:label="@string/app_name" >
 			<intent-filter>
-				<action android:name="android.intent.action.BUTTON" />
+				<action android:name="acom.codered.wakeupwithintent.BUTTON" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<data android:mimeType="text/plain" />
 			</intent-filter>
@@ -21,6 +21,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
 	</application>
 
 </manifest>
