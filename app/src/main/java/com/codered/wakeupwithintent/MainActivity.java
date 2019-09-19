@@ -59,11 +59,9 @@ public class MainActivity extends Activity
 	}
 
 	private void sendIntent() {
-		Intent intent = new Intent(
-			"com.codered.wakeupwithintent.BUTTON",
-			Uri.parse("content://hello")
-		);
-			
+		Intent intent = new Intent();
+		intent.setAction("com.codered.wakeupwithintent.BUTTON");
+		startActivity(intent);			
 	}
 
 	@Override
