@@ -58,6 +58,14 @@ public class MainActivity extends Activity
 		);
 	}
 
+	private void sendIntent() {
+		Intent intent = new Intent(
+			"com.codered.wakeupwithintent.BUTTON",
+			Uri.parse("content://hello")
+		);
+			
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -67,6 +75,7 @@ public class MainActivity extends Activity
 
 		if (MainActivity.intentCount == 0) {
 			keepUpdating();
+			sendIntent();
 		}
 		MainActivity.intentCount += 1;
 
