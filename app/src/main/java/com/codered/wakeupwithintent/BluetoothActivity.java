@@ -5,7 +5,8 @@ import android.app.*;
 import android.os.*;
 import android.view.*;
 import android.content.BroadcastReceiver;
-import java.awt.event.KeyEvent;
+import android.content.Intent;
+import android.content.Context;
 
 public class BluetoothActivity extends BroadcastReceiver
 {
