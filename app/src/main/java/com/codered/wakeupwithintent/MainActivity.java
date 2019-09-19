@@ -33,7 +33,9 @@ public class MainActivity extends Activity
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		test(keyCode + "");
+		if (keyCode == 4) {
+			System.exit(0);
+		}
 		return true;
 	}
 
