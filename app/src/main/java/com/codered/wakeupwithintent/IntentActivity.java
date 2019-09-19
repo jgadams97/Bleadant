@@ -24,7 +24,6 @@ public class IntentActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		MainActivity.intentCount += 1;
-		System.exit(0);
 	}
 }
 
