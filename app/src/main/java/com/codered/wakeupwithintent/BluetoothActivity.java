@@ -15,7 +15,7 @@ public class BluetoothActivity extends BroadcastReceiver
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		
-		KeyEvent event = (KeyEvent)intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+		KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
 		BluetoothActivity.received = event.getKeyCode();
 		//if (KeyEvent.KEYCODE_MEDIA_PLAY == event.getKeyCode()) {    
                 //call my method    
