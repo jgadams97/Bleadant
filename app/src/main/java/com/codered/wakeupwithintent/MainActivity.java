@@ -13,6 +13,7 @@ import junit.framework.*;
 import android.content.Intent;
 import android.app.usage.*;
 import android.media.session.MediaSession;
+import android.net.Uri;
 
 public class MainActivity extends Activity
 {
