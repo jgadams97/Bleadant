@@ -64,8 +64,8 @@ public class MainActivity extends Activity
 		setContentView(R.layout.main);
 
 		Intent intent = getIntent();
-		/*Uri uri = intent.getData();
-		if (intent.getType().equals("text/plain")) {
+		Uri uri = intent.getData();
+		/*if (intent.getType().equals("text/plain")) {
 			test("RECEIVED!");
 		}*/
 
