@@ -66,7 +66,9 @@ public class MainActivity extends Activity
 		Intent intent = getIntent();
 		Uri uri = intent.getData();
 		String type = intent.getType();
+		if (type.equals("text/plain")) {
 
+		}
 		/*if (intent.getType().equals("text/plain")) {
 			test("RECEIVED!");
 		}*/
