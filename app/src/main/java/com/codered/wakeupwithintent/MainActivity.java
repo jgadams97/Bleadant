@@ -19,9 +19,6 @@ import android.content.pm.*;
 
 public class MainActivity extends Activity
 {
-	private int position = 0;
-	private List<String> procs = null;
-	private List<String> procs2 = null;
 
 	private void wakeUp() {
 		PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
@@ -45,38 +42,7 @@ public class MainActivity extends Activity
 			System.exit(0);
 		}
 		if (keyCode == 24) {
-			if (procs == null) {
-				procs = GetAllProcesses();
-				test("Please set new procs.");
-			} else {
-				procs2 = GetAllProcesses();
-				String s = "";
-				for (int i = 0; i < procs.size(); i++) {
-					boolean found = false;
-					for (int j = 0; j < procs2.size(); j++) {
-						if (procs.get(i).equals(procs2.get(j))) {
-							found = true;
-							break;
-						}
-					}
-					if (!found) {
-						s += "|" + procs.get(i);
-					}
-				}
-				for (int i = 0; i < procs2.size(); i++) {
-					boolean found = false;
-					for (int j = 0; j < procs.size(); j++) {
-						if (procs2.get(i).equals(procs.get(j))) {
-							found = true;
-							break;
-						}
-					}
-					if (!found) {
-						s += "|" + procs2.get(i);
-					}
-				}
-				test(procs.size() + "|" + procs2.size() + "|" + s);
-			}
+			test(checkApp("com.yado.sbh"));
 		}
 		return true;
 	}
@@ -107,11 +73,16 @@ public class MainActivity extends Activity
 		List<String> procs = new ArrayList<>();
 		UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
 		long time = System.currentTimeMillis();
-		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 1000, time);
+		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000, time);
 		for (int i = 0; i < appList.size(); i++) {
 			procs.add(appList.get(i).getPackageName());
 		}
 		return procs;
+	}
+
+	private boolean checkApp(String name) {
+		UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
+		return usm.isAppInactive(name);
 	}
 
 	@Override
@@ -123,6 +94,7 @@ public class MainActivity extends Activity
 		if (!checkForPermission()) {
 			startActivity(new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS));
 		}
+
 
 		test("Please set procs.");
 	}
