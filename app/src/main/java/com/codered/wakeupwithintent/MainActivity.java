@@ -75,7 +75,7 @@ public class MainActivity extends Activity
 						s += "|" + procs2.get(i);
 					}
 				}
-				test(s);
+				test(procs.size() + "|" + procs2.size() + "|" + s);
 			}
 		}
 		return true;
