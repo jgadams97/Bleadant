@@ -107,7 +107,7 @@ public class MainActivity extends Activity
 		List<String> procs = new ArrayList<>();
 		UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
 		long time = System.currentTimeMillis();
-		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
+		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 1000*5, time);
 		for (int i = 0; i < appList.size(); i++) {
 			procs.add(appList.get(i).getPackageName());
 		}
