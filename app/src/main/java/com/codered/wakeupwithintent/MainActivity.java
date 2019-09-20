@@ -41,6 +41,7 @@ public class MainActivity extends Activity
 		if (keyCode == 4) {
 			System.exit(0);
 		}
+		test(keyCode + "");
 		return true;
 	}
 
