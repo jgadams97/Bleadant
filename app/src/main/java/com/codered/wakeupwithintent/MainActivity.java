@@ -72,6 +72,7 @@ public class MainActivity extends Activity
 			proc += pid.processName;
 			//    am.killBackgroundProcesses(pid.processName);
 		}
+		test(proc);
 		/*if (MainActivity.intentCount == 0) {
 			keepUpdating();
 		}
