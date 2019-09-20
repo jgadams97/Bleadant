@@ -15,6 +15,7 @@ import android.app.usage.*;
 import android.media.session.MediaSession;
 import android.net.Uri;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.content.pm.*;
 
 public class MainActivity extends Activity
 {
