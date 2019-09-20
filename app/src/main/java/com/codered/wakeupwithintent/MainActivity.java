@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.app.usage.*;
 import android.media.session.MediaSession;
 import android.net.Uri;
+android.app.ActivityManager.RunningAppProcessInfo;
 
 public class MainActivity extends Activity
 {
@@ -65,7 +66,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.main);
 
 		String proc = "";
-		ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
 
 		for (RunningAppProcessInfo pid : am.getRunningAppProcesses()) {
 			if (!proc.equals("")) proc += "|";
