@@ -80,6 +80,7 @@ public class MainActivity extends Activity
 
 		boolean canDo = needPermissionForBlocking(getApplicationContext());
 		if (canDo) {
+			String proc = "";
 			UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
 			long time = System.currentTimeMillis();
 			List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
