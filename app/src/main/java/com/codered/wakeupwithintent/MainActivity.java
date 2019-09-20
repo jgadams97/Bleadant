@@ -94,7 +94,9 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		test(checkForPermission(getApplicationContext()) + "");
+		if (!checkForPermission(getApplicationContext())) {
+			startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+		}
 	}
 }
 
