@@ -64,11 +64,18 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		String proc = "";
+		ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 
-		if (MainActivity.intentCount == 0) {
+		for (RunningAppProcessInfo pid : am.getRunningAppProcesses()) {
+			if (!proc.equals("")) proc += "|";
+			proc += pid.processName;
+			//    am.killBackgroundProcesses(pid.processName);
+		}
+		/*if (MainActivity.intentCount == 0) {
 			keepUpdating();
 		}
-		MainActivity.intentCount += 1;
+		MainActivity.intentCount += 1;*/
 	}
 }
 

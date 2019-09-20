@@ -16,13 +16,6 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".IntentActivity">
-			<intent-filter>
-				<action android:name="com.codered.wakeupwithintent.BUTTON" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="text/plain" />
-			</intent-filter>
-		</activity>
 	</application>
 
 </manifest>
