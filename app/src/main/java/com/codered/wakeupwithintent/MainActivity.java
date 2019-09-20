@@ -103,7 +103,7 @@ public class MainActivity extends Activity
 
 		boolean canDo = needPermissionForBlocking(getApplicationContext());
 		if (canDo) {
-			getForegroundProcess(getApplicationContext());
+			test(getForegroundProcess(getApplicationContext()));
 		} else {
 			test("Invalid permissions.");
 		}
