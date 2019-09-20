@@ -95,7 +95,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.main);
 
 		if (!checkForPermission(getApplicationContext())) {
-			startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+			startActivity(new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS));
 		}
 	}
 }
