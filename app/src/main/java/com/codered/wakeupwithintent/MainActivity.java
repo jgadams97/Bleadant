@@ -66,18 +66,12 @@ public class MainActivity extends Activity
 		setContentView(R.layout.main);
 
 		String proc = "";
-		ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-
-		for (RunningAppProcessInfo pid : am.getRunningAppProcesses()) {
-			if (!proc.equals("")) proc += "|";
-			proc += pid.processName;
-			//    am.killBackgroundProcesses(pid.processName);
+		UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
+		long time = System.currentTimeMillis();
+		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
+		for (int i = 0; i < appList.size(); i++) {
+			proc += "|" + appList.get(i).getPackageName() + "|";
 		}
-		test(proc);
-		/*if (MainActivity.intentCount == 0) {
-			keepUpdating();
-		}
-		MainActivity.intentCount += 1;*/
 	}
 }
 
