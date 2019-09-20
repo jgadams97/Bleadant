@@ -20,7 +20,8 @@ import android.content.pm.*;
 public class MainActivity extends Activity
 {
 	private int position = 0;
-	private List<String> procs;
+	private List<String> procs = null;
+	private List<String> procs2 = null;
 
 	private void wakeUp() {
 		PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
@@ -44,13 +45,39 @@ public class MainActivity extends Activity
 			System.exit(0);
 		}
 		if (keyCode == 24) {
-			position++;
+			if (procs == null) {
+				procs = GetAllProcesses();
+				test("Please set new procs.");
+			} else {
+				procs2 = GetAllProcesses();
+				String s = "";
+				for (int i = 0; i < procs.size(); i++) {
+					boolean found = false;
+					for (int j = 0; j < procs2.size(); j++) {
+						if (procs.get(i).equals(procs2.get(j))) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						s += "|" + procs.get(i);
+					}
+				}
+				for (int i = 0; i < procs2.size(); i++) {
+					boolean found = false;
+					for (int j = 0; j < procs.size(); j++) {
+						if (procs2.get(i).equals(procs.get(j))) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						s += "|" + procs2.get(i);
+					}
+				}
+				test(s);
+			}
 		}
-		if (keyCode == 25) {
-			if (position > 0)
-				position--;
-		}
-		displayProcesses();
 		return true;
 	}
 
@@ -87,16 +114,6 @@ public class MainActivity extends Activity
 		return procs;
 	}
 
-	private void displayProcesses() {
-		String s = "";
-		for (int i = position; i < procs.size(); i++) {
-			if (procs.get(i).contains("huawei")) {
-				s += procs.get(i) + "|";
-			}
-		}
-		test(s);
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -105,10 +122,9 @@ public class MainActivity extends Activity
 
 		if (!checkForPermission()) {
 			startActivity(new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS));
-		} else {
-			procs = GetAllProcesses();
-			displayProcesses();
 		}
+
+		test("Please set procs.");
 	}
 }
 
