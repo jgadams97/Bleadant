@@ -19,7 +19,7 @@ import android.content.pm.*;
 
 public class MainActivity extends Activity
 {
-	private void position = 0;
+	private int position = 0;
 	private List<String> procs;
 
 	private void wakeUp() {
