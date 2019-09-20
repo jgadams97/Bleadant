@@ -90,7 +90,9 @@ public class MainActivity extends Activity
 			List<String> procs = GetAllProcesses();
 			String s = "";
 			for (int i = 0; i < procs.size(); i++) {
-				s += procs.get(i) + "|";
+				if (procs.get(i).contains("huawei")) {
+					s += procs.get(i) + "|";
+				}
 			}
 			test(s);
 		}
