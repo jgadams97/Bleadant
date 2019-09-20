@@ -96,6 +96,15 @@ public class MainActivity extends Activity
 
 		if (!checkForPermission(getApplicationContext())) {
 			startActivity(new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS));
+		} else {
+			String proc = "";
+			UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
+			long time = System.currentTimeMillis();
+			List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
+			for (int i = 0; i < appList.size(); i++) {
+				proc += "|" + appList.get(i).getPackageName();
+			}
+			test(proc);
 		}
 	}
 }
