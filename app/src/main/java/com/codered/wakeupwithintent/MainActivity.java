@@ -59,34 +59,23 @@ public class MainActivity extends Activity
 			100
 		);
 	}
-	private boolean checkForPermission(Context context) {
+
+	private boolean checkForPermission() {
+		Context context = getApplicationContext();
 		AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
 		int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.getPackageName());
 		return mode == AppOpsManager.MODE_ALLOWED;
 	}
 
-    public static String getForegroundProcess(Context context) {
-        String topPackageName = null;
-        UsageStatsManager usage = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        long time = System.currentTimeMillis();
-        List<UsageStats> stats = usage.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time - 1000*1000, time);
-        if (stats != null) {
-            SortedMap<Long, UsageStats> runningTask = new TreeMap<Long,UsageStats>();
-            for (UsageStats usageStats : stats) {
-                runningTask.put(usageStats.getLastTimeUsed(), usageStats);
-            }
-            if (runningTask.isEmpty()) {
-                return null;
-            }
-            topPackageName =  runningTask.get(runningTask.lastKey()).getPackageName();
-        }
-        if(topPackageName==null) {
-		return "";
-        }
-
-        return topPackageName;
-    }
-
+	private List<String> GetAllProcesses() {
+		List<String> procs;
+		UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
+		long time = System.currentTimeMillis();
+		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
+		for (int i = 0; i < appList.size(); i++) {
+			procs.add(appList.get(i).getPackageName());
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -94,17 +83,15 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		if (!checkForPermission(getApplicationContext())) {
+		if (!checkForPermission()) {
 			startActivity(new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS));
 		} else {
-			String proc = "";
-			UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
-			long time = System.currentTimeMillis();
-			List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
-			for (int i = 0; i < appList.size(); i++) {
-				proc += "|" + appList.get(i).getPackageName();
+			List<String> procs = GetAllProcesses();
+			String s = "";
+			for (int i = 0; i < procs.size(); i++) {
+				s += procs.get(i) + "|";
 			}
-			test(proc);
+			test(s);
 		}
 	}
 }
