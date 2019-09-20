@@ -78,14 +78,18 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		String proc = needPermissionForBlocking(getApplicationContext()) + "";
-		test(proc);
-		/*UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
-		long time = System.currentTimeMillis();
-		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
-		for (int i = 0; i < appList.size(); i++) {
-			proc += "|" + appList.get(i).getPackageName() + "|";
-		}*/
+		boolean canDo = needPermissionForBlocking(getApplicationContext());
+		if (canDo) {
+			UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
+			long time = System.currentTimeMillis();
+			List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
+			for (int i = 0; i < appList.size(); i++) {
+				proc += "|" + appList.get(i).getPackageName() + "|";
+			}
+			test(proc);
+		} else {
+			test("Invalid permissions.");
+		}
 	}
 }
 
