@@ -61,7 +61,7 @@ public class MainActivity extends Activity
 	}
 	private boolean checkForPermission(Context context) {
 		AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-		int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, Process.myUid(), context.getPackageName());
+		int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.getPackageName());
 		return mode == AppOpsManager.MODE_ALLOWED;
 	}
 
