@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.codered.wakeupwithintent" >
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+	<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" 
+		tools:ignore="ProtectedPermissions" />
 	<application
 		android:allowBackup="true"
 		android:icon="@drawable/ic_launcher"

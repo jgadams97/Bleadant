@@ -59,17 +59,10 @@ public class MainActivity extends Activity
 			100
 		);
 	}
-
-	public static boolean needPermissionForBlocking(Context context){
-		try {
-			PackageManager packageManager = context.getPackageManager();
-			ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0);
-			AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-			int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
-			return  (mode != AppOpsManager.MODE_ALLOWED);
-		} catch (PackageManager.NameNotFoundException e) {
-			return true;
-		}
+	private boolean checkForPermission(Context context) {
+		AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+		int mode = appOps.checkOpNoThrow(OPSTR_GET_USAGE_STATS, Process.myUid(), context.getPackageName());
+		return mode == MODE_ALLOWED;
 	}
 
     public static String getForegroundProcess(Context context) {
@@ -101,12 +94,7 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		boolean canDo = needPermissionForBlocking(getApplicationContext());
-		if (canDo) {
-			test(getForegroundProcess(getApplicationContext()));
-		} else {
-			test("Invalid permissions.");
-		}
+		test(checkForPermission(getApplicationContext()) + "");
 	}
 }
 
