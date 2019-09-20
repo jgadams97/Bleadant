@@ -42,7 +42,7 @@ public class MainActivity extends Activity
 			System.exit(0);
 		}
 		if (keyCode == 24) {
-			test(checkApp("com.yado.sbh"));
+			test(checkApp("com.yado.sbh") + "");
 		}
 		return true;
 	}
