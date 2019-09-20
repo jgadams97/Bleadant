@@ -88,8 +88,7 @@ public class MainActivity extends Activity
             topPackageName =  runningTask.get(runningTask.lastKey()).getPackageName();
         }
         if(topPackageName==null) {
-            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-            context.startActivity(intent);
+		return "";
         }
 
         return topPackageName;
@@ -104,14 +103,7 @@ public class MainActivity extends Activity
 
 		boolean canDo = needPermissionForBlocking(getApplicationContext());
 		if (canDo) {
-			String proc = "";
-			UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
-			long time = System.currentTimeMillis();
-			List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
-			for (int i = 0; i < appList.size(); i++) {
-				proc += "|" + appList.get(i).getPackageName() + "|";
-			}
-			test(proc);
+			getForegroundProcess(getApplicationContext());
 		} else {
 			test("Invalid permissions.");
 		}
