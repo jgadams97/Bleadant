@@ -59,7 +59,6 @@ public class MainActivity extends Activity
 	}
 
 	private void keepUpdating() {
-		test(MainActivity.intentCount + "");
 		new android.os.Handler().postDelayed(
 			new Runnable() {
 				public void run() {
