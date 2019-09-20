@@ -59,19 +59,31 @@ public class MainActivity extends Activity
 		);
 	}
 
+	public static boolean needPermissionForBlocking(Context context){
+		try {
+			PackageManager packageManager = context.getPackageManager();
+			ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0);
+			AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+			int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
+			return  (mode != AppOpsManager.MODE_ALLOWED);
+		} catch (PackageManager.NameNotFoundException e) {
+			return true;
+		}
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		String proc = "";
-		UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
+		String proc = needPermissionForBlocking(getApplicationContext()) + "";
+		/*UsageStatsManager usm = (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
 		long time = System.currentTimeMillis();
 		List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  time - 10000*10000, time);
 		for (int i = 0; i < appList.size(); i++) {
 			proc += "|" + appList.get(i).getPackageName() + "|";
-		}
+		}*/
 	}
 }
 
