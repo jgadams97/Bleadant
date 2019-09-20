@@ -19,7 +19,9 @@ import android.content.pm.*;
 
 public class MainActivity extends Activity
 {
-	public static int intentCount = 0;
+	private void position = 0;
+	private List<String> procs;
+
 	private void wakeUp() {
 		PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
 		WakeLock wl = pm.newWakeLock(
@@ -41,7 +43,14 @@ public class MainActivity extends Activity
 		if (keyCode == 4) {
 			System.exit(0);
 		}
-		test(keyCode + "");
+		if (keyCode == 24) {
+			position++;
+		}
+		if (keyCode == 25) {
+			if (position > 0)
+				position--;
+		}
+		displayProcesses();
 		return true;
 	}
 
@@ -79,6 +88,16 @@ public class MainActivity extends Activity
 		return procs;
 	}
 
+	private void displayProcesses() {
+		String s = "";
+		for (int i = position; i < procs.size(); i++) {
+			if (procs.get(i).contains("huawei")) {
+				s += procs.get(i) + "|";
+			}
+		}
+		test(s);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -88,14 +107,8 @@ public class MainActivity extends Activity
 		if (!checkForPermission()) {
 			startActivity(new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS));
 		} else {
-			List<String> procs = GetAllProcesses();
-			String s = "";
-			for (int i = 0; i < procs.size(); i++) {
-				if (procs.get(i).contains("huawei")) {
-					s += procs.get(i) + "|";
-				}
-			}
-			test(s);
+			procs = GetAllProcesses();
+			displayProcesses();
 		}
 	}
 }
